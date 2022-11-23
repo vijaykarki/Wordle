@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="/style.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <div>
+        
+ 
+    <form action="/" method="POST">
+    <label for="word">Five letter word:</label>
+    <input type="text" id="word" name="word" placeholder="five letter word">
+    <button type="submit">Play</button>
+   </div>
+
+    <div id="display-result" name="display-result" style="width: 200px">
+         {% for word, char in result %}
+            <div id="inner-list" class="inner-list" style="font-size: 30px; padding: 3px; width: 100%: height: 420px;">
+                {% for letter in word %}
+                <div style="display: inline; width: 20%; height: 100%">
+                    {% if char[loop.index0] == 0 %}
+                    <div style="background-color: #787c7e; width: 100px; display: inline; color: white; font-weight: bold; ">
+                        {{letter}}
+                    </div>
+                    {% elif char[loop.index0] == 1 %}
+                    <div style="background-color: #c9b458; width: 100px; display: inline; color: white; font-weight: bold; ">
+                        {{letter}}
+                    </div>
+
+                    {% else %}
+                    <div style="background-color: #6aaa64; width: 100px; display: inline; color: white; font-weight: bold;">
+                        {{letter}}
+                    </div>
+                    {% endif %}
+
+                </div>
+                {%endfor%}
+            </div>
+        {%endfor%} 
+    </div>
+    </body>
+</html>
