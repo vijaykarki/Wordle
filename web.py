@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request
-from Wordle import run
+from flask import Flask, render_template, request, redirect, url_for
+from Wordle import * 
 app = Flask(__name__)
 
 
@@ -8,14 +8,32 @@ def home():
     return render_template('index.html')
 
 @app.route('/', methods=['POST'])
-def printMain():
+def printWord():
     word = request.form['word']
     finalString, newEncoding = run(word)
-    
-    # printColorMetrix = run()
-    # return finalString
     return render_template('index.html', result=zip(finalString, newEncoding))
 
+@app.route('/random', methods=['POST'])
+def printRandom():
+    hiddenWord = request.form['notseen']
+    # value = request.form['hide']
+    finalString, newEncoding, word = runRandom('true')
+    print(word)
+    return render_template('index.html', result=zip(finalString, newEncoding), notseen=hiddenWord)
+
+@app.route('/compare', methods=['POST'])
+def checkWord():
+    newWord = request.form['newword']
+    finalString, newEncoding, word = runRandom('false')
+    print(word)
+    if newWord == word:
+        message = "Hurrey! You have guessed the word."
+        return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
+    else:
+        message = "Sorry! Try again."
+        return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
+    # message = "Sorry! Your chances are over. The word was {}".format(single_word)
+    # return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

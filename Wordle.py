@@ -10,7 +10,6 @@ with open("wordlist.txt") as wordlist:
     list_of_words = [line.rstrip() for line in wordlist.readlines()]
     # list_of_words = list_of_words[:20]
 
-
 def getWord(argument):
     # single_word = input("Enter a five letter english word")
     single_word = argument
@@ -87,12 +86,39 @@ def run(argument):
 
     # selectRandom(removeDuplicate(newResult))
 
-    for i in range(len(finalString)):
-        print (finalString[i])
-        print(newEncoding[i])
+    # for i in range(len(finalString)):
+    #     print (finalString[i])
+    #     print(newEncoding[i])
 
-    print (printColorMetrix(newEncoding))
+    # print (printColorMetrix(newEncoding))
 
     return (finalString, newEncoding)
+single_word = np.random.choice(list_of_words)
+print(single_word)
+
+def runRandom(argument):
+    global single_word
+    if argument == 'true':
+        single_word = np.random.choice(list_of_words)
+    else:
+        single_word = single_word
+    result = generateEncoding(single_word, list_of_words)
+    newResult = sortFunction(result)
+    newEncoding = removeDuplicate(newResult)[:6]
+    finalString = compareEncodings(result, list_of_words, newEncoding)
+    
+    # for i in range(len(finalString)):
+    #     print (finalString[i])
+    #     print(newEncoding[i])
+
+    # print (printColorMetrix(newEncoding))
+
+    return (finalString, newEncoding, single_word)
+
+# def compareWord(argument):
+#     if argument == single_word:
+#         return ('true', single_word)
+#     else:
+#         return ('false', single_word)
 
 # run('blank')
