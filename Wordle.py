@@ -1,6 +1,5 @@
 import sys
 import numpy as np
-from random import *
 green_sq = '\U0001F7E9' # unicode for green square
 yellow_sq = '\U0001F7E8'
 black_sq = '\U00002B1B'
@@ -54,7 +53,6 @@ def removeDuplicate(argument):
     result = []
     [result.append(i) for i in argument if i not in result]
     return result
-
 
 def compareEncodings(result_list, string_list, finalEncoding):
     finalString = []
