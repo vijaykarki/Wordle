@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import matplotlib.pyplot as plt
 green_sq = '\U0001F7E9' # unicode for green square
 yellow_sq = '\U0001F7E8'
 black_sq = '\U00002B1B'
@@ -77,6 +78,32 @@ def printColorMetrix(argument):
                 print(green_sq, end='')
         print()
 
+def plotLetterMatch():
+    zero = []
+    twos = []
+    f1 =plt.figure()
+    f2 =plt.figure()
+    for word in list_of_words:
+        result = generateEncoding(word, list_of_words)
+        sum_of_zero = np.sum(np.asarray(result) == 0, axis=1)
+        sum_of_two = np.sum(np.asarray(result) == 2, axis=1)
+        sum_of_encoding = np.sum(result,axis=1)
+        zero.append(np.count_nonzero(sum_of_zero == 5) and np.count_nonzero(sum_of_encoding == 0))
+        twos.append(np.count_nonzero(sum_of_encoding == 8) and np.count_nonzero(sum_of_two == 4))
+
+    ax1 = f1.add_subplot(111)
+    ax1.plot(zero)
+    ax1.set_xlabel('Total words') 
+    ax1.set_ylabel('Total Count') 
+    ax1.set_title("Words that have no matching letters with other words")
+
+    ax2 = f2.add_subplot(111)
+    ax2.plot( twos)
+    ax2.set_xlabel('Total words') 
+    ax2.set_ylabel('Total Count') 
+    ax2.set_title('Words with most matching letters')
+    plt.show()
+
 def run(argument):
     single_word = getWord(argument)
     result = generateEncoding(single_word, list_of_words)
@@ -100,3 +127,4 @@ def runRandom(argument):
     newEncoding = removeDuplicate(newResult)[:6]
     finalString = compareEncodings(result, list_of_words, newEncoding)
     return (finalString, newEncoding, single_word)
+# plotLetterMatch()

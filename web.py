@@ -36,4 +36,4 @@ def checkWord():
     # return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) 
