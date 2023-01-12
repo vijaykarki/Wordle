@@ -78,6 +78,32 @@ def printColorMetrix(argument):
                 print(green_sq, end='')
         print()
 
+
+def run(argument):
+    single_word = getWord(argument)
+    result = generateEncoding(single_word, list_of_words)
+    newResult = optimizationFunction(result)
+    newEncoding = removeDuplicate(newResult)[:6]
+    print(newEncoding)
+    finalString = compareEncodings(result, list_of_words, newEncoding)
+    return (finalString, newEncoding)
+
+single_word = np.random.choice(list_of_words)
+print(single_word)
+
+def runRandom(argument):
+    global single_word
+    if argument == 'true':
+        single_word = np.random.choice(list_of_words)
+    else:
+        single_word = single_word
+    result = generateEncoding(single_word, list_of_words)
+    newResult = optimizationFunction(result)
+    newEncoding = removeDuplicate(newResult)[:6]
+    print(newEncoding)
+    finalString = compareEncodings(result, list_of_words, newEncoding)
+    return (finalString, newEncoding, single_word)
+
 def plotLetterMatch():
     zero = []
     twos = []
@@ -104,27 +130,3 @@ def plotLetterMatch():
     ax2.set_title('Words with most matching letters')
     plt.show()
 
-def run(argument):
-    single_word = getWord(argument)
-    result = generateEncoding(single_word, list_of_words)
-    newResult = optimizationFunction(result)
-    newEncoding = removeDuplicate(newResult)[:6]
-    print(newEncoding)
-    finalString = compareEncodings(result, list_of_words, newEncoding)
-    return (finalString, newEncoding)
-
-single_word = np.random.choice(list_of_words)
-print(single_word)
-
-def runRandom(argument):
-    global single_word
-    if argument == 'true':
-        single_word = np.random.choice(list_of_words)
-    else:
-        single_word = single_word
-    result = generateEncoding(single_word, list_of_words)
-    newResult = optimizationFunction(result)
-    newEncoding = removeDuplicate(newResult)[:6]
-    finalString = compareEncodings(result, list_of_words, newEncoding)
-    return (finalString, newEncoding, single_word)
-# plotLetterMatch()

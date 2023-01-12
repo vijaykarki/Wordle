@@ -32,8 +32,7 @@ def checkWord():
     else:
         message = "Sorry! Try again."
         return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
-    # message = "Sorry! Your chances are over. The word was {}".format(single_word)
-    # return render_template('index.html', result=zip(finalString, newEncoding), message=message, notseen='true')
+    
 
 if __name__ == "__main__":
     app.run(debug=True) 
